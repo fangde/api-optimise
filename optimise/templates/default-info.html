@@ -1,0 +1,10 @@
+<div ng-init="">
+
+    <div ng-hide="UserSessionService.isLoggedIn">
+        Please login first.
+    </div>
+    <div ng-show="UserSessionService.isLoggedIn">
+        Welcome back! Please select a questionnaire from the left to start.
+    </div>
+</div>
+

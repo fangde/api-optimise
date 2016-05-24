@@ -1,0 +1,97 @@
+<div>
+    <script>
+        $(document).ready(function () {
+            $("#txtSettings a").click(function () {
+                $('body').css("zoom", this.id + "%");
+            });
+        });
+    </script>
+    <div class="modal-header">
+        <h3 class="modal-title">{{startQs}} Questionnaire - {{QSDTC.toDateString()}} - WID:{{USUBJID}}
+            <button type="button" class="close" ng-click="cancel();" aria-label="Close"><span aria-hidden="true">Close&times;</span></button></h3>
+        <div class="text-setting">
+            <div id="txtSettings" class="text-size-modal">
+                <span>Need to increase text size?</span>
+                <a style="font-size:14px;" id="100" href="javascript:void(0);">a</a>
+                <a style="font-size:16px;" id="125" href="javascript:void(0);">a</a>
+                <a style="font-size:18px;" id="150" href="javascript:void(0);">a</a>
+                <a style="font-size:20px;" id="175" href="javascript:void(0);">a</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body" style="padding-right: 50px">
+        <div ng-show="manual_date_entry&&currentGroup==0" class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Date</label>
+                    <input type="date" ng-model="QSDTC" class="form-control"></div>
+            </div>
+        </div>
+        <div class="container-fluid" id="msqol">
+        <div class="row">
+            <form>
+                <div class="form-group">
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='0' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Normal:</strong>
+                            I may have some mild symptoms, mostly sensory due to MS but they do not limit my activity. If I do have an attack, I return to normal when the attack has passed.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='1' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Mild Disability:</strong>
+                            I have some noticeable symptoms from my MS but they are minor and have only a small effect on my lifestyle.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='2' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Moderate Disability:</strong>
+                            I don't have any limitations in my walking ability. However, I do have significant problems due to MS that limit daily activities in other ways.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='3' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Gait Disability:</strong>
+                            MS does interfere with my activities, especially my walking. I can work a full day, but athletic or physically demanding activities are more difficult than they used to be. I usually don't need a cane or other assistance to walk, but I might need some assistance during an attack.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='4' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Early Cane:</strong>
+                            I use a cane or a single crutch or some other form of support (such as touching a wall or leaning on someone's arm) for walking all the time or part of the time, especially when walking outside. I think I can walk 25 feet in 20 seconds without a cane or crutch. I always need some assistance (cane or crutch) if I want to walk as far as 3 blocks.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='5' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Late Cane:</strong>
+                            To be able to walk 25 feet, I have to have a cane, crutch or someone to hold onto. I can get around the house or other buildings by holding onto furniture or touching the walls for support. I may use a scooter or wheelchair if I want to go greater distances.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='6' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Bilateral Support:</strong>
+                            To be able to walk as far as 25 feet I must have 2 canes or crutches or a walker. I may use a scooter or wheelchair for longer distances.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='7' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Wheelchair/ Scooter:</strong>
+                            My main form of mobility is a wheelchair. I may be able to stand and/or take one or two steps, but I can't walk 25 feet, even with crutches or a walker.
+                        </label>
+                    </div>
+                    <div class="radio marginBottom">
+                        <label><input type="radio" ng-model="pddScore" value='8' ng-disabled="getDisabledFields()" ng-change="addPDDS()">
+                            <strong>Bedridden:</strong>
+                            Unable to sit in a wheelchair for more than one hour.
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row modal-footer" style="text-align:center;margin-top:20px">
+            <a class="btn btn-sm btn-success" ng-click="submit()">Submit</a>
+        </div>
+    </div>
+        </div>
+</div>

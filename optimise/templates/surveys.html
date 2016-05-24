@@ -1,0 +1,69 @@
+<div ng-controller="SurveyController" data-ng-init="initialise()" ng-show="showThisContent()">
+    <div ng-show="UserSessionService.isLoggedIn==false" class="col-sm-12 text-center"><h3>Please login first</h3></div>
+
+    <table class="table table-hover " ng-show="UserSessionService.isLoggedIn==true">
+        <thead>
+        <tr>
+            <th><strong>Survey Code</strong></th>
+            <th><strong>Survey Name</strong></th>
+            <th><strong>Survey Cycle</strong></th>
+            <th><strong>Last Submitted on</strong></th>
+            <th><strong>Actions</strong></th>
+        </tr>
+        </thead>
+        <tbody class="">
+        <tr>
+            <td>MSQOL-54</td>
+            <td>Multiple Sclerosis Quality of Life questionnaire</td>
+            <td>Monthly</td>
+            <td>{{qHistories['Physical Health Composite'][0]!=null?convertToDisplayDate(qHistories['Physical Health Composite'][0].QSDTC):""}} <b>{{convertDaysDiffString((qHistories['Physical Health Composite'][0].QSDTC))}}</b></td>
+            <td>   <a ng-hide="!qsStartEnabled['MSQOL-54']" href=""
+                      ng-click="startFillQs('MSQOL-54','lg')"
+                      ng-hide='' class="btn btn-success btn-sm">
+
+                <span class="glyphicon glyphicon-plus"></span> Start New</a>
+                <span class="label label-danger" ng-show="qsStartEnabled['MSQOL-54']==false">You have already completed this survey recently.</span></a></td>
+        </tr>
+        <tr>
+            <td>PROMIS</td>
+            <td>PROMIS Global Health Scale</td>
+            <td>Monthly</td>
+            <td>{{qHistories['Global Mental Health component'][0]!=null?convertToDisplayDate(qHistories['Global Mental Health component'][0].QSDTC):""}} <b>{{convertDaysDiffString((qHistories['Global Mental Health component'][0].QSDTC))}}</b></td>
+            <td>   <a ng-hide="!qsStartEnabled['PROMIS']" href=""
+                      ng-click="startFillQs('PROMIS','lg')"
+                      ng-hide='' class="btn btn-success btn-sm" >
+
+                <span class="glyphicon glyphicon-plus"></span> Start New</a>
+                <span class="label label-danger" ng-show="qsStartEnabled['PROMIS']==false">You have already completed this survey recently.</span></td>
+        </tr>
+        <tr>
+            <td>PDDS</td>
+            <td>Patient Determined Disease Steps Performance</td>
+            <td>Monthly</td>
+            <td>{{qHistories['Patient Determined Disease Step'][0]!=null?convertToDisplayDate(qHistories['Patient Determined Disease Step'][0].QSDTC):""}} <b>{{convertDaysDiffString((qHistories['Patient Determined Disease Step'][0].QSDTC))}}</b></td>
+            <td>   <a ng-hide="!qsStartEnabled['PDDS']" href=""
+                      ng-click="startFillQs('PDDS','lg')"
+                      ng-hide='' class="btn btn-success btn-sm">
+
+                <span class="glyphicon glyphicon-plus"></span> Start New</a>
+                <span class="label label-danger" ng-show="qsStartEnabled['PDDS']==false">You have already completed this survey recently.</span></td>
+        </tr>
+        <tr>
+            <td>Neuro-QoL</td>
+            <td>Quality of Life in Neurological Disorders</td>
+            <td>Quarterly</td>
+            <td><b>Not Yet Submitted</b></td>
+            <td>  <a ng-hide="!qsStartEnabled['QoL']" href=""
+                      ng-click="startFillQs('QoL','lg')"
+                      ng-hide='' class="btn btn-success btn-sm">
+
+                <span class="glyphicon glyphicon-plus"></span> Start New</a>
+
+                <span class="label label-danger" ng-show="qsStartEnabled['QoL']==false">You have already completed this survey recently.</span></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</div>

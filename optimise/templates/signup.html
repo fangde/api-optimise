@@ -1,0 +1,131 @@
+<div>
+    <script>
+        $(document).ready(function () {
+            $("#txtSettings a").click(function () {
+                $('body').css("zoom", this.id + "%");
+            });
+        });
+    </script>
+    <div class="modal-header">
+        <!--VAS Scale - {{QSDTC.toUTCString()}}- WID:{{USUBJID}}-->
+        <h4 class="modal-title">JOIN NOW
+            <button type="button" class="close" ng-click="cancel();" aria-label="Close"><span aria-hidden="true">Close&times;</span></button></h4>
+        <div class="text-setting">
+            <div id="txtSettings" class="text-size-modal">
+                <span>Need to increase text size?</span>
+                <a style="font-size:14px;" id="100" href="javascript:void(0);">a</a>
+                <a style="font-size:16px;" id="125" href="javascript:void(0);">a</a>
+                <a style="font-size:18px;" id="150" href="javascript:void(0);">a</a>
+                <a style="font-size:20px;" id="175" href="javascript:void(0);">a</a>
+            </div>
+        </div>
+    </div>
+      <!--<div class="row">-->
+        <!--<div class="col-sm-4">-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label">Date</label>-->
+                <!--<input type="date" ng-model="QSDTC" class="form-control"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="modal-body" style="padding-right: 50px">
+        <div class="row">
+        <div class="col-sm-12">
+            <form role="form" name="userForm" ng-submit="submitForm(userForm.$valid)">
+                <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+                <hr class="colorgraph">
+                <div class="form-group" ng-class="{'has-error':userForm.username.$error.minlength||userForm.username.$error.maxlength||!userForm.username.$valid}">
+                    <input type="text" name="username" ng-model="username" id="username" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control input-lg" placeholder="Username" ng-minlength="4" ng-maxlength="20" tabindex="4" required>
+                    <p ng-show="userForm.username.$error.minlength" class="help-block">username is too short.</p>
+                    <p ng-show="userForm.username.$error.maxlength" class="help-block">username is too long.</p>
+                    <p ng-show="!userForm.username.$valid" class="help-block">Username can only be alphanumeric characters</p>
+                </div>
+                <div class="row">
+
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" ng-model="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" >
+                            <!--<p ng-show="userForm.first_name.$invalid && !userForm.first_name.$pristine" class="help-block">You name is required.</p>-->
+
+                        </div>
+                       </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" >
+                            <!--<p ng-show="userForm.first_name.$invalid && !userForm.first_name.$pristine" class="help-block">You name is required.</p>-->
+                        </div>
+                    </div>
+                </div>
+              <!--  <div class="form-group">
+                    <input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="Display Name" tabindex="3">
+                </div>-->
+                <div class="form-group" ng-class="{'has-error':(userForm.email.$invalid && !userForm.email.$pristine)||userForm.email.$error.minlength}">
+                    <input type="email" name="email" ng-model="email" id="email" class="form-control input-lg" placeholder="Email Address" ng-minlength="4" tabindex="4" required>
+                    <p ng-show="userForm.email.$error.minlength||(userForm.email.$invalid && !userForm.email.$pristine)" class="help-block">Please enter a valid email.</p>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group" ng-class="{'has-error':userForm.password.$error.minlength||userForm.password.$error.maxlength}">
+                            <input type="password" ng-model="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-minlength="6" ng-maxlength="30" required>
+                            <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+                            <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group" ng-class="{'has-error':userForm.password_confirmation.$error.unique}">
+                            <input type="password" ng-model="password_confirmation" name="password_confirmation" id="password_confirmation" class="form-control input-lg" password-match="password" placeholder="Confirm Password" tabindex="6"  ng-minlength="6" ng-maxlength="30" required>
+                            <p ng-show="userForm.password_confirmation.$error.unique" class="help-block">Must match the previous entry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-3">
+					<span class="button-checkbox">
+						<button type="button"  ng-click="termClick()" class="btn glyphicon {{t_and_c=='checked'?'glyphicon-check':'glyphicon-unchecked'}}" data-color="info" tabindex="7">I Agree</button>
+                        <input type="checkbox"  name="t_and_c" id="t_and_c" class="hidden" value="1">
+					</span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-9">
+                        By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="terms.html" target="_blank" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                    </div>
+                </div>
+
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                   <!-- <div class="col-xs-12 col-md-6"><a href="" class="btn btn-warning btn-block btn-lg" ng-click="cancel();">Cancel</a></div>-->
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    </div>
+    <div class="row modal-footer" style="text-align:center;">
+
+    </div>
+</div>

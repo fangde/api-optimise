@@ -1,0 +1,23 @@
+.marginTop {
+    margin-top: 10px;
+}
+
+.doubleMarginTop {
+    margin-top: 30px;
+}
+
+.marginBottom {
+    margin-bottom: 10px;
+}
+
+.btn-block.selectedRadio{
+    background-color: #cdc1b1;
+}
+
+.qs-modal-window .modal-dialog {
+    width: 90%;
+}
+
+.vas-modal-window .modal-dialog {
+    width: 50%;
+}

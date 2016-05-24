@@ -1,0 +1,26 @@
+<div>
+    <div class="modal-header">
+        <!--VAS Scale - {{QSDTC.toUTCString()}}- WID:{{USUBJID}}-->
+        <h4 class="modal-title">My Account
+            <button type="button" class="close" ng-click="cancel();" aria-label="Close"><span aria-hidden="true">Close&times;</span></button></h4>
+    </div>
+      <!--<div class="row">-->
+        <!--<div class="col-sm-4">-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label">Date</label>-->
+                <!--<input type="date" ng-model="QSDTC" class="form-control"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="modal-body" style="padding-right: 50px">
+    <span class="col-sm-12">My Username: {{userSession.username}}</span>
+        <span class="col-sm-12">My Patient ID: {{userSession.w_id}}</span>
+        <br>
+        <br>
+        <br><br><br>
+        <a href="" ng-click="openVasModal()">What are you feeling at the moment?</a>
+    </div>
+    <div class="row modal-footer" style="text-align:center;">
+    <a class="btn btn-sm btn-success" ng-click="submit()">Save</a>
+        <a class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</a>
+    </div>
+</div>

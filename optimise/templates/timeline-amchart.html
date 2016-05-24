@@ -1,0 +1,40 @@
+<div id="myTimeline" class="double marginTop container-fluid" >
+
+    <style>
+        .timelineDIVFirst {
+            width	: 91%;
+            height	: 250px;
+        }
+        .timelineDIV {
+            width	: 91%;
+            height	: 200px;
+        }
+
+    </style>
+   <!-- <div ng-repeat="n in chartsDIV">
+        do something number {{$index}}
+        <div class="timelineAmChart" id="timelineDIV{{$index}}">
+    </div>-->
+    <div class="row">
+        <div class="col-sm-1"><h4>{{chartsOrder[0]}}</h4></div>
+    <div class="timelineDIVFirst" id="timelineDIV0"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><h4>{{chartsOrder[1]}}</h4></div>
+    <div class="timelineDIV" id="timelineDIV1"></div>
+    </div>
+    <div class="row">  <div class="col-sm-1"><h4>{{chartsOrder[2]}}</h4></div>
+    <div class="timelineDIV" id="timelineDIV2"></div>
+        </div>
+    <div class="timelineDIV" id="timelineDIV3"></div>
+    <div class="timelineDIV" id="timelineDIV4"></div>
+
+    <script type="application/javascript">
+
+console.log($('#myTimeline').scope());
+//console.log($('#myTimeline').scope().getTestData());
+//            console.log(scope);
+
+    </script>
+
+</div>

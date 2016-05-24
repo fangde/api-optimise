@@ -1,0 +1,37 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="language" content="en"/>
+    <!--    <base href="/wikihealth/optimise/">-->
+    <title>Wiki-Health OPTIMISE</title>
+
+    <!--    <link type="text/css" href="/assets/ui-redmond/jquery-ui-1.8.21.custom.css" rel="Stylesheet" />-->
+    <link type="text/css" href="css/site.css" rel="Stylesheet"/>
+
+    <script type="text/javascript" src="../js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="FileSaver.js"></script>
+    <script type="text/javascript" src="jquery.wordexport.js"></script>
+    <!--    <script type="text/javascript" src="plugins/Chart.min.js"></script>-->
+
+</head>
+
+<body>
+<div id="page-content">
+    <h1>Hello, world!</h1>
+    <p>Hello!!!</p>
+    <p>!asdfasdf</p>
+</div>
+<a class="word-export" href="javascript:void(0)"> Export as .doc </a>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $("a.word-export").click(function(event) {
+            $("#page-content").wordExport();
+        });
+    });
+</script>
+</body>
+</html>

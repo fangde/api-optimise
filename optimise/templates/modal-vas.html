@@ -1,0 +1,41 @@
+<div>
+    <div class="modal-header">
+        <!--VAS Scale - {{QSDTC.toUTCString()}}- WID:{{USUBJID}}-->
+        <h4 class="modal-title">How are you feeling?
+            <button type="button" class="close" ng-click="cancel();" aria-label="Close"><span aria-hidden="true">Close&times;</span></button></h4>
+    </div>
+      <!--<div class="row">-->
+        <!--<div class="col-sm-4">-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label">Date</label>-->
+                <!--<input type="date" ng-model="QSDTC" class="form-control"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="modal-body" style="padding-right: 50px">
+        <div ng-show="manual_date_entry" class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Date</label>
+                    <input type="date" ng-model="QSDTC" class="form-control"></div>
+            </div>
+        </div>
+        Current Date and Time: {{QSDTC.toDateString()+" "+ QSDTC.toLocaleTimeString()}}
+        <br>
+        <div class="col-sm-12 text-center">
+            <img src="img/emotions/{{vasScale}}.png" height="100px">
+        </div>
+        <br>
+        <span class="glyphicon glyphicon-arrow-left ">Worst</span>
+        <span class="glyphicon glyphicon-arrow-right pull-right">Best</span>
+        <rzslider
+                  rz-slider-floor="0"
+                  rz-slider-ceil="10"    rz-slider-model="vasScale" rz-slider-translate="translate"></rzslider>
+        <h5>Please move the slider choose your feeling. <b>0 is the worst, 10 is the best.</b></h5>
+
+    </div>
+
+    <div class="row modal-footer" style="text-align:center;">
+    <a class="btn btn-sm btn-success" ng-click="submit()">Yes, I've chosen.It's time to submit! </a>
+        <a class="btn btn-sm btn-danger" ng-click="cancel()">I would rather not to tell</a>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div ng-init="">
+
+    <div ng-show="qHistories['Patient Determined Disease Step'].length>0">
+        <p>Last submitted on:{{convertToDisplayDate(qHistories['Patient Determined Disease Step'][0].QSDTC)}} (<b>{{convertDaysDiffString((qHistories['Patient Determined Disease Step'][0].QSDTC))}}</b>)</p>
+
+        <p>Patient Determined Disease Step: {{qHistories['Patient Determined Disease Step'][0].QSSTRESC|number:3}}</p>
+
+
+            <highchart id="chart1" config="chartconfig"></highchart>
+
+            <a href="" class="pull-right btn btn-primary btn-sm" ng-click="jumpToQ(currentQs)"><span class="glyphicon glyphicon-repeat"></span>
+                Refresh</a>
+        </p>
+    </div>
+    <div ng-hide="UserSessionService.isLoggedIn==false||(qHistories['Patient Determined Disease Step'].length>0)">
+        <p>No Record Found</p>
+    </div>
+    <div ng-hide="UserSessionService.isLoggedIn">
+        Please login first.
+    </div>
+</div>
+

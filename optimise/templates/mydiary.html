@@ -1,0 +1,31 @@
+<div class="double marginTop container-fluid">
+    <h4> </h4>
+    <div class="row">
+    <div class="col-sm-12">
+        <span class="input-group-addon input-group" smilies-selector="message" smilies-placement="right" smilies-title="Smilies"></span>
+        <input ng-model="message" placeholder="What's on your mind?"  class="form-control">
+
+        <div class="col-sm-12 input-group"><input type="submit" ng-click="postDiary()" value="Post" class="btn btn-primary btn-block btn-sm" tabindex="7"></div>
+    </div>
+
+    </div>
+    <br>
+
+    <h4>My Diary</h4>
+
+
+        <div ng-repeat="diary in diaries">
+            <div class="panel panel-default">
+                <!--{{UserSession.username}}-->
+                <div class="panel-heading">{{diary[0]}}</div>
+                <div class="panel-body">
+                    <div ng-bind-html="diary[1] | smilies"></div>
+                </div>
+            </div>
+        </div>
+
+    <pagination total-items="bigTotalItems" items-per-page="itemsPerPage" ng-change="pageChanged()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+
+
+</div>

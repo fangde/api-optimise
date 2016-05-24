@@ -1,0 +1,60 @@
+<div  ng-controller="SurveyController" data-ng-init="initialise()" ng-show="showThisContent()">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="nav nav-pills nav-stacked " >
+                <h5>Select a Questionnaire</h5>
+                <li ng-class="{active: 'MSQOL-54'==currentQs}"><a href=""
+                                                                  ng-click="jumpToQ('MSQOL-54')">MSQOL-54<span
+                        class="badge">{{qHistories['Physical Health Composite'].length}}</span></a>
+                </li>
+                <li ng-class="{active: 'PROMIS'==currentQs}"><a href="" ng-click="jumpToQ('PROMIS')">PROMIS Global Health Scale<span
+                        class="badge">{{qHistories['Global Mental Health component'].length}}</span> </a></li>
+                <li ng-class="{active: 'PDDS'==currentQs}"><a href="" ng-click="jumpToQ('PDDS')">PDDS<span
+                        class="badge">{{qHistories['Patient Determined Disease Step'].length}}</span> </a></li>
+                <li ng-class="{active: 'QoL'==currentQs}"><a href="" ng-click="jumpToQ('QoL')">Quality of Life (Neuro-QoL) <span
+                        class="badge"></span></a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div>
+                <!--                ng-hide='isQsStarted()'-->
+                <div class="form-group">
+                    <!--                    <label class="control-label">Date</label>-->
+                    <!--                    <input type="date" ng-model="QSDTC" class="form-control"></div>-->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Information - {{currentQs}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div default-info-entry ng-show="currentQs==''"></div>
+                            <div msqol54-info-entry ng-show="'MSQOL-54'==currentQs"></div>
+                            <div promis-info-entry ng-show="'PROMIS'==currentQs"></div>
+                            <div pdds-info-entry ng-show="'PDDS'==currentQs"></div>
+                            <div neuro-qol-info-entry ng-show="'QoL'==currentQs"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-sm-6 pull-right " style="text-align:right;">
+                            <a ng-disabled="{{qsEnabled}}" href=""
+                               ng-click="startFillQs(currentQs,'lg')"
+                               ng-hide='' class="btn btn-success btn-sm">
+
+                                <span class="glyphicon glyphicon-plus"></span> Start New
+                                {{currentQs}}</a>
+                            <span class="label label-danger" ng-show='{{qsEnabled}}'>You have already answered this questionnaire.</span>
+                        </div>
+                    </div>
+                </div>
+                <!--            <div msqol54-entry></div>-->
+                <!--        <div msqol54-entry ng-show="startQs=='msqol54'"></div>-->
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

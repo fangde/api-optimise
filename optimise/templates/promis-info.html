@@ -1,0 +1,25 @@
+<div ng-init="">
+
+    <div ng-show="qHistories['Global Physical Health component'].length>0&&qHistories['Global Mental Health component'].length>0&&
+    qHistories['Global Physical Health component'][0].QSDTC==qHistories['Global Mental Health component'][0].QSDTC">
+        <p>Last submitted on:{{convertToDisplayDate(qHistories['Global Mental Health component'][0].QSDTC)}} (<b>{{convertDaysDiffString((qHistories['Global Mental Health component'][0].QSDTC))}}</b>)</p>
+
+        <p>Physical Score: {{qHistories['Global Physical Health component'][0].QSSTRESC|number:3}}</p>
+
+        <p>Mental Score:  {{qHistories['Global Mental Health component'][0].QSSTRESC|number:3}}
+
+            <highchart id="chart1" config="chartconfig"></highchart>
+
+            <a href="" class="pull-right btn btn-primary btn-sm" ng-click="jumpToQ(currentQs)"><span class="glyphicon glyphicon-repeat"></span>
+                Refresh</a>
+        </p>
+    </div>
+    <div ng-hide="UserSessionService.isLoggedIn==false||(qHistories['Global Physical Health component'].length>0&&qHistories['Global Mental Health component'].length>0&&
+    qHistories['Global Physical Health component'][0].QSDTC==qHistories['Global Mental Health component'][0].QSDTC)">
+        <p>No Record Found</p>
+    </div>
+    <div ng-hide="UserSessionService.isLoggedIn">
+        Please login first.
+    </div>
+</div>
+

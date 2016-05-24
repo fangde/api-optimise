@@ -1,0 +1,48 @@
+<div id="myTimeline" class="double marginTop container-fluid">
+
+
+    <!-- <div ng-repeat="n in chartsDIV">
+         do something number {{$index}}
+         <div class="timelineAmChart" id="timelineDIV{{$index}}">
+     </div>-->
+    <div>
+        <highchart class="timelineDIV" ng-hide="qHistories['Patient Determined Disease Step']==null||qHistories['Patient Determined Disease Step'].length==0" id="timelineDIV0" config="PDDS_Chart"></highchart>
+        <div ng-hide="UserSessionService.isLoggedIn==false||(qHistories['Patient Determined Disease Step'].length>0)">
+            <p>No PDDS Record Found</p>
+        </div>
+    </div>
+    <div>
+        <highchart class="timelineDIV"  ng-hide="qHistories['Global Physical Health component']==null||qHistories['Global Physical Health component'].length==0" id="timelineDIV1" config="PROMIS_Chart"></highchart>
+        <div ng-hide="UserSessionService.isLoggedIn==false||(qHistories['Global Physical Health component'].length>0&&qHistories['Global Mental Health component'].length>0&&
+    qHistories['Global Physical Health component'][0].QSDTC==qHistories['Global Mental Health component'][0].QSDTC)">
+            <p>No PROMIS Record Found</p>
+        </div>
+    </div>
+    <div>
+        <highchart class="timelineDIV" ng-hide="qHistories['Physical Health Composite']==null||qHistories['Physical Health Composite'].length==0" id="timelineDIV2" config="MSQOL54_Chart"></highchart>
+        <div ng-hide="UserSessionService.isLoggedIn==false||(qHistories['Physical Health Composite'].length>0&&qHistories['Mental Health Composite'].length>0&&
+    qHistories['Physical Health Composite'][0].QSDTC==qHistories['Mental Health Composite'][0].QSDTC)">
+            <p>No MSQOL-54 Record Found</p>
+        </div>
+    </div>
+    <div>
+        <highchart class="timelineDIV" ng-hide="qHistories['VAS']==null||qHistories['VAS'].length==0" id="timelineDIV3" config="VAS_Chart"></highchart>
+        <div ng-hide="UserSessionService.isLoggedIn==false||qHistories['VAS'].length>0">
+            <p>No VAS Record Found</p>
+        </div>
+    </div>
+
+    <div ng-hide="UserSessionService.isLoggedIn">
+        Please login first.
+    </div>
+
+
+    <script type="application/javascript">
+
+        console.log($('#myTimeline').scope());
+        //console.log($('#myTimeline').scope().getTestData());
+        //            console.log(scope);
+
+    </script>
+
+</div>
