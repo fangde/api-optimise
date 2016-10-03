@@ -1,19 +1,23 @@
 <?php
 //headers function
-define("destinationURL",'ssl://central.xnat.org');
-//define("destinationURL",'ssl://cif-xnat.hh.med.ic.ac.uk');
-
+//define("destinationURL",'ssl://central.xnat.org');
+define("destinationURL",'http://cif-xnat.hh.med.ic.ac.uk');
 $server=$_SERVER;
+//$myoutput = $server."\n";
 //var_dump($server);
 //return;
 
 $pathInfo=$server['PATH_INFO'];
+//$myoutput = $pathInfo . "\n";
 $queryString=$server['QUERY_STRING'];
+//$myoutput = $myoutput.$queryString."\n";
 
-$destinationURL=destinationURL.$pathInfo.'?'.$queryString;
-//echo $destinationURL;
+$destinationURL=$destinationURL.$pathInfo.'?'.$queryString;
+//$myoutput = $myoutput.$destinationURL."\n";
+
 $response = proxy_request($server,$destinationURL); //raw response
-
+//$myoutput = $myoutput.$response."\n";
+//echo $response;
 /*$file = 'log.txt';
 $log = "John Smith\n";
 file_put_contents($file, $log, FILE_APPEND | LOCK_EX);*/
@@ -21,11 +25,14 @@ file_put_contents($file, $log, FILE_APPEND | LOCK_EX);*/
 $headerArray = explode("\r\n", $response['header']);
 foreach($headerArray as $headerLine) {
     header($headerLine); //handle header
+    //$myoutput = $myoutput.$headerLine;
 }
 $finalReturn=$response['content'];
+//$myoutput = $myoutput.$finalReturn;
+//echo $myoutput;
+//echo $myoutput;
 header('Access-Control-Allow-Origin: *');
-echo isset($_GET['callback'])
-    ? "{$_GET['callback']}($finalReturn)"
+echo isset($_GET['callback']) ? "{$_GET['callback']}($finalReturn)"
     : $finalReturn;
 
 
@@ -45,6 +52,8 @@ if(!function_exists('apache_request_headers')) {
 
 function proxy_request($SERVER, $url)
 {
+	echo $SERVER;
+	echo $url;
     $ip = ''; //declare IP
 //below update IP address
     if (!empty($SERVER['HTTP_CLIENT_IP'])) {

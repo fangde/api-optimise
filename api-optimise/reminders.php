@@ -1,80 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yang
- * Date: 25/01/2016
- * Time: 11:02
- */
 
 include 'utilities.php';
 include 'config.php';
-
-$setting = 1;
-if($setting==1)
-{
-    $token=null;
-    $headers = apache_request_headers();
-    foreach ($headers as $header => $value) {
-        if($header=="token")
-        {
-            $token=$value;
-        }
-        //echo $header;
-    }
-    echo $token;
-
-    if($token==null&&isset($_REQUEST['token']))
-    {
-        $token=$_REQUEST['token'];
-    }
-    if($token==null){
-        ReturnException(ERROR_Permission_denied,401,"missing or invalid access token");
-        return;
-    }else{
-        $connection=db_connect();
-        if($connection==null)
-        {
-            ReturnException(Internal_Error,500);
-            return;
-        }
-        $tokens=$connection->selectCollection(TOKEN_C_TABLE);
-        $db_token=$tokens->findOne(array(token => $token));
-        if($db_token==null)
-        {
-            ReturnException(ERROR_Permission_denied,401,"invalid access token:".$token);
-            return;
-        }
-
-    }
-    //echo "token accepted";
-    if(isset($_REQUEST['token']))
-    {
-	unset($_REQUEST['token']);  //remove token from parameters
-    	unset($_GET['token']);//remove token from parameters
-    	unset($_POST['token']);//remove token from parameters
-	}
-}
-
+		
 $connection = db_connect(OPTIMISE_DB);
-$optimise = $connection->selectCollection(OPTIMISE_TABLE);
+$reminder = $connection->selectCollection('reminders');
+
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     parse_str($_SERVER['QUERY_STRING'], $rawqueryList);
     $mQuery = array();//mongoDB query list
     $RecordSet = [];
     foreach ($rawqueryList as $key => $value) {
-    	    if ($key != 'token')
-               $mQuery[$key] = $value;
+        $mQuery[$key] = $value;
     }
-    //var_dump($mQuery);
-    $cursor = $optimise->find($mQuery);
+
+    $cursor = $reminder->find($mQuery);
     foreach ($cursor as $id => $valueRoot) {
-//    var_dump($valueRoot);
         $recordItems = array();
         foreach ($valueRoot as $key => $value) {
-//        var_dump($value);
             $recordItems[] = array('fieldName' => $key, 'value' => $value);
         }
-        $RecordSet[] = array('RecordItems' => $recordItems);
+        //$RecordSet[] = array('RecordItems' => $recordItems);
+	$RecordSet[] = $recordItems;
     }
     $returnResult = array('RecordSet' => $RecordSet);
     $jsonReturn = json_encode($returnResult);
@@ -89,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         echo "JSON ERROR";
         return;
     }
+    echo $json;
      if (isset($json['CurrentRecord']) && isset($json['NewRecord'])&&$_REQUEST["OID"]==2) {
         //updating document
         $CurrentRecord = $json['CurrentRecord'];
@@ -108,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         }
         for ($i = 0; $i < count($NewRecord); $i++) {
             $subItem = $NewRecord[$i];
-//                   var_dump($subItem);
             if (isset($subItem) && isset($subItem['fieldName']) && isset(
                     $subItem['value'])
             ) {
@@ -119,13 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             }
         }
         if (count($mQuery) > 0 && count($updateArray) > 0) {
-//            var_dump($mQuery);
-//            var_dump($updateArray);
-//            $cursor=$optimise->find($mQuery);
-//            foreach ($cursor as $id => $valueRoot) {
-//            var_dump($valueRoot);
-//            }
-            $result = $optimise->findAndModify($mQuery, array('$set' => $updateArray), array('_id'=>1),array('upsert' => false,'new'=>true));
+            $result = $reminder->findAndModify($mQuery, array('$set' => $updateArray), array('_id'=>1),array('upsert' => false,'new'=>true));
         }
         echo "RECORD UPDATED";
     } else if (isset($json['RecordSet'])) {
@@ -136,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $mongoItem = array();
                 for ($j = 0; $j < count($RecordSet[$i]['RecordItems']); $j++) {
                     $subItem = $RecordSet[$i]['RecordItems'][$j];
-//                   var_dump($subItem);
                     if (isset($subItem) && isset($subItem['fieldName']) && isset(
                             $subItem['value'])
                     ) {
@@ -147,8 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
                 }
                 if (count($mongoItem) > 0) {
-                    $result = $optimise->insert($mongoItem);
-//                    var_dump($result);
+                    $result = $reminder->insert($mongoItem);
                 }
             }
         }
@@ -165,26 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         echo "JSON ERROR";
         return;
     }
-    if(isset($json['RecordItems'])&&count($json['RecordItems'])>0)
+    if(isset($json['USUBJID'])&&count($json['USUBJID'])>0)
     {
-        $RecordItems = $json['RecordItems'];
-        $mQuery = array();//mongoDB query list
-        for ($i = 0; $i < count($RecordItems); $i++) {
-            $subItem = $RecordItems[$i];
-            if (isset($subItem) && isset($subItem['fieldName']) && isset(
-                    $subItem['value'])
-            ) {
-                $fieldName = $subItem['fieldName'];
-//                $value = strval($subItem['value']);
-                $value = $subItem['value'];
-                $mQuery[$fieldName] = $value;
-            }
-        }
+	$mQuery = array('USUBJID'=>$json['USUBJID'],'REMINDERSEQ'=>$json['REMINDERSEQ']);//mongoDB query list
+       
         if(count($mQuery)>0) {
-	    if ($mQuery['USUBJID'] != null)
-               $optimise->remove($mQuery);
-	    if ($mQuery['SSS'] == null)
-	       echo "null test";
+            $reminder->remove($mQuery);
+	    echo print_r($mQuery);
         }
         echo "RECORD DELETED";
     }else{

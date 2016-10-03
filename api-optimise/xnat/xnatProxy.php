@@ -2,17 +2,16 @@
 //headers function
 define("destinationURL",'ssl://central.xnat.org');
 //define("destinationURL",'ssl://cif-xnat.hh.med.ic.ac.uk');
-
 $server=$_SERVER;
 //var_dump($server);
 //return;
-
 $pathInfo=$server['PATH_INFO'];
 $queryString=$server['QUERY_STRING'];
 
 $destinationURL=destinationURL.$pathInfo.'?'.$queryString;
 //echo $destinationURL;
 $response = proxy_request($server,$destinationURL); //raw response
+//echo $response;
 
 /*$file = 'log.txt';
 $log = "John Smith\n";

@@ -10,11 +10,9 @@ if($connection==null)
     return;
 }
 $method = $_SERVER['REQUEST_METHOD'];
-
 if($method=="POST") {
     $data = file_get_contents('php://input'); //get POST payload
     $json = json_decode($data, true);
-    
     if(isset($json["mode"])&&$json["mode"]=="clinician"&&isset($json[w_id]))
     {
         //this is for clinician login for users to use in clinic, specioal mode
@@ -29,7 +27,6 @@ if($method=="POST") {
         }
         $tokens=$connection->selectCollection(TOKEN_U_TABLE);
         $token_value=md5(uniqid(rand(), true));
-	//echo $token_value;
         $token_array=array(w_id=>$w_id,token=>$token_value,m_id=>$user["_id"],"created_date"=>new MongoDate());
         $return_value=$tokens->insert($token_array);
         if($return_value['ok']==1) {

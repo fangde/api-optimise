@@ -59,7 +59,7 @@ if($method=="POST") {
                     $siteConfig=$siteConfig[config];
                 }
             }
-            if(isset($user[site]))
+	if(isset($user[site]))
             {
                 $siteConfigTable=$connection->selectCollection(SITES_TABLE);
                 $siteID=$siteConfigTable->findOne([site=>$user[site]]);

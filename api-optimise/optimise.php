@@ -1,10 +1,10 @@
 <?php
+
 include 'utilities.php';
 include 'config.php';
 //headers function
 $server=$_SERVER;
 //var_dump($server);
-//return;
 $setting=2; //1 enable Auth
 
 /*
@@ -23,7 +23,10 @@ if($setting==1)
         {
             $token=$value;
         }
+	//echo $header;
     }
+    echo $token;
+    
     if($token==null&&isset($_REQUEST['token']))
     {
         $token=$_REQUEST['token'];
@@ -47,7 +50,9 @@ if($setting==1)
         }
 
     }
+    echo "token accepted";
 }
+
 
 if($setting==1)
 {
@@ -143,6 +148,7 @@ if($setting==1)
             ReturnException(ERROR_MISSING_USUBJID,401,"missing USUBJID field");
             return;
         }
+	//echo "this: ".$db_token[w_id];
         if($_REQUEST['USUBJID']!=$db_token[w_id])
         {
             ReturnException(ERROR_Permission_denied,401,"you can not access data that not belong to you");
@@ -179,6 +185,8 @@ if($setting==1)
     }
 }
 
+
+
 if(isset($_REQUEST['token']))
 {
     unset($_REQUEST['token']);  //remove token from parameters
@@ -189,9 +197,11 @@ if(isset($_REQUEST['token']))
 //echo 'here';
 $response = proxy_request($server,destinationURL); //raw response
 
+
 /*$file = 'log.txt';
 $log = "John Smith\n";
 file_put_contents($file, $log, FILE_APPEND | LOCK_EX);*/
+
 
 $headerArray = explode("\r\n", $response['header']);
 foreach($headerArray as $headerLine) {

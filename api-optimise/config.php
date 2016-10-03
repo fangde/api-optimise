@@ -5,26 +5,9 @@
 include_once("contants.php");
 
 define ("PRODUCTION_MODE", true);
-//
-//define("destinationURL",'http://www.optimise-ms.org/api/OPTIMISE');
-//if(PRODUCTION_MODE) {
-//    error_reporting(0);
-//    define("destinationURL",'http://146.169.35.160/api/OPTIMISE');
-//    define ("DB_HOST", "146.169.32.150:27017");
-//}else{
-//    define("destinationURL",'http://www.optimise-ms.org/api/OPTIMISE');
-//    define ("DB_HOST", "192.99.243.218:27017");
-//}
-//define ("DB_HOST", "192.99.243.218:27017");
 
+define ("DB_HOST", "192.168.99.100:27017");
 
-// This option is for Docker
-//define ("DB_HOST", "192.168.99.100:27017");
-
-// This option is for optimise-ms.org
-define ("DB_HOST", "146.169.32.150:27017");
-
-//static $db=null;
 function db_connect($dbname=null) {
     try {
         $db = new MongoClient("mongodb://" . DB_HOST);
@@ -124,5 +107,4 @@ function ExistErrorsCheck($json,$variables)
         }
     }
 }
-
 
